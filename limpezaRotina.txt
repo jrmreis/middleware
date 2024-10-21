@@ -1,0 +1,11 @@
+
+WAS-ALL stop
+ps -ef | grep java
+cd /opt/IBM/WebSphere/wp_profile
+rm -rf OLD*
+mv temp/ OLDtemp
+mv tranlog/ OLDtranlog
+mv wstemp/ OLDwstemp
+./bin/osgiCfgInit.sh
+./bin/clearClassCache.sh
+WAS-ALL start

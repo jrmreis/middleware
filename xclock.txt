@@ -1,0 +1,33 @@
+Alexandre Alves13:24
+yum install  xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps -y
+export LC_ALL=C
+systemctl restart sshd
+
+xauth list
+echo $DISPLAY
+xauth add LINHA_RESULTADO_DO_PRIMEIRO_COMANDO
+export DISPLAY=RESULTADO_DO_echoDISPLAY
+
+Under root privileges open /etc/ssh/sshd_config and uncomment the following lines if they are commented:
+X11Forwarding yes
+X11DisplayOffset 10
+X11UseLocalhost yes
+Then logout and login again with -X flag in ssh. You do not have to set or unset DISPLAY environment variable.
+
+
+yum install java-1.7.0-openjdk -y
+
+
+yum install telnet-server telnet -y
+systemctl status telnet.socket
+systemctl start telnet.socket
+systemctl enable telnet.socket
+
+
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT -m comment --comment "WAS-SOAP port"
+service iptables save
+firewall-cmd --permanent --add-port=8080/tcp
+firewall-cmd --reload
+
+192.168.1.107 centos-1
+192.168.1.108 centos-2

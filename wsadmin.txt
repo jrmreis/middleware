@@ -1,0 +1,11 @@
+/opt/IBM/WebSphere/AppServer/bin
+
+./wsadmin.sh -conntype NONE
+
+AdminTask.changeFileRegistryAccountPassword ('[-userId  wasadmin -password admin]')
+
+AdminTask.addFileRegistryAccount('[-userId wasadmin -password admin]')
+
+AdminTask.setAdminActiveSecuritySettings('[-customProperties ["com.ibm.websphere.security.test=false"]]')
+
+AdminConfig.save()
