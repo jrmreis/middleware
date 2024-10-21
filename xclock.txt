@@ -1,4 +1,4 @@
-Alexandre Alves13:24
+
 yum install  xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps -y
 export LC_ALL=C
 systemctl restart sshd
@@ -31,3 +31,6 @@ firewall-cmd --reload
 
 192.168.1.107 centos-1
 192.168.1.108 centos-2
+
+
+Fomte: Alexandre Alves
