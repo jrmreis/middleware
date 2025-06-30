@@ -1,4 +1,4 @@
-Vou criar um script PowerShell para fazer essa coleta de evidências e encerramento do processo. Este script irá procurar processos com "COPEC" na linha de comando, coletar informações antes e depois do encerramento.Criei um script PowerShell completo para investigar e encerrar processos que contenham "COPEC". Aqui estão as principais funcionalidades:
+Script PowerShell para fazer essa coleta de evidências e encerramento do processo. Este script irá procurar processos com "COPEC" na linha de comando, coletar informações antes e depois do encerramento.Criei um script PowerShell completo para investigar e encerrar processos que contenham "COPEC". Aqui estão as principais funcionalidades:
 
 ## **Características do Script:**
 
