@@ -28,6 +28,19 @@ Executable: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
 Command Line:
   "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -WindowStyle Minimized -ExecutionPolicy Bypass -File "C:\inetpub\wwwroot\COPEC\copec_worker.ps1"
 =============================================
+
+This pattern will be used to find the process during monitoring.
+Confirm this configuration? (Y/N): y
+
+=== CONFIGURATION SAVED SUCCESSFULLY ===
+File: .\logs\process_config.json
+Search pattern: "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -WindowStyle Minimized -ExecutionPolicy Bypass -File "C:\inetpub\wwwroot\COPEC\copec_worker.ps1"
+Method: CommandLine
+====================================
+
+Now you can run the script normally to monitor this type of process.
+Example: .\copec_hunter.ps1
+
 ```
 
 
@@ -69,8 +82,19 @@ Command Line:
 2. **Run as administrator** in PowerShell:
    ```powershell
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-   .\copec_hunter.ps1
+   .\copec_hunter.ps1 -config
    ```
+   or
+   ```powershell
+   PowerShell -ExecutionPolicy Bypass -File ".\copec_hunter.ps1"
+   .\copec_hunter.ps1 -config
+   ```
+   or
+   ```powershell
+   Unblock-File -Path ".\copec_hunter.ps1"
+   .\copec_hunter.ps1 -config
+   ```
+
 
 ## **Generated Files:**
 - `copec_investigation.log` - Complete operation log
