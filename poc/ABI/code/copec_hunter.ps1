@@ -8,7 +8,7 @@ function Write-Log {
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $logEntry = "[$timestamp] [$Type] $Message"
     Write-Host $logEntry
-    $logEntry | Out-File -FilePath ".\copec_investigation.log" -Append -Encoding UTF8
+    $logEntry | Out-File -FilePath ".\log\copec_investigation.log" -Append -Encoding UTF8
 }
 
 # Function to collect detailed process information
@@ -93,7 +93,7 @@ try {
         Show-Evidence -Evidence $preTerminationEvidence -Phase "PRE-TERMINATION"
         
         # Save evidence to JSON file for later analysis
-        $evidenceFile = ".\copec_evidence_PID_$($process.ProcessId)_$(Get-Date -Format 'yyyyMMdd_HHmmss').json"
+        $evidenceFile = ".\log\copec_evidence_PID_$($process.ProcessId)_$(Get-Date -Format 'yyyyMMdd_HHmmss').json"
         $preTerminationEvidence | ConvertTo-Json -Depth 3 | Out-File -FilePath $evidenceFile -Encoding UTF8
         Write-Log "Evidence saved to: $evidenceFile" "SAVE"
         
@@ -159,7 +159,7 @@ try {
             Write-Log "====================================`n" "EVIDENCE"
             
             # Save termination evidence
-            $terminationFile = ".\copec_termination_PID_$($process.ProcessId)_$(Get-Date -Format 'yyyyMMdd_HHmmss').json"
+            $terminationFile = ".\log\copec_termination_PID_$($process.ProcessId)_$(Get-Date -Format 'yyyyMMdd_HHmmss').json"
             $terminationEvidence | ConvertTo-Json -Depth 3 | Out-File -FilePath $terminationFile -Encoding UTF8
             Write-Log "Termination evidence saved to: $terminationFile" "SAVE"
         }
@@ -172,7 +172,7 @@ try {
     Write-Log "Stack Trace: $($_.Exception.StackTrace)" "ERROR"
 } finally {
     Write-Log "Investigation completed." "END"
-    Write-Log "Logs saved to: .\copec_investigation.log" "INFO"
+    Write-Log "Logs saved to: .\log\copec_investigation.log" "INFO"
     Write-Log "Evidence saved to JSON files in current directory." "INFO"
 }
 
@@ -181,6 +181,6 @@ Write-Host "`n=== OPERATION SUMMARY ===" -ForegroundColor Yellow
 Write-Host "Date/Time: $(Get-Date)" -ForegroundColor White
 Write-Host "User: $env:USERNAME" -ForegroundColor White
 Write-Host "Computer: $env:COMPUTERNAME" -ForegroundColor White
-Write-Host "Complete log: .\copec_investigation.log" -ForegroundColor White
+Write-Host "Complete log: .\log\copec_investigation.log" -ForegroundColor White
 Write-Host "Evidence: JSON files in current directory" -ForegroundColor White
 Write-Host "============================" -ForegroundColor Yellow
