@@ -2,7 +2,35 @@
 
 PowerShell script for evidence collection and process termination. This script will search for processes with "COPEC" in the command line, collect information before and after termination.
 
-A complete PowerShell script was created to investigate and terminate processes containing "COPEC". Here are the main functionalities:
+## Configuration
+
+Run the script with `-config` parameter to configure the target process.
+
+**Example:** 
+```powershell
+.\copec_hunter.ps1 -config
+```
+```shell-session
+CONFIGURATION MODE ACTIVATED
+
+=== TARGET PROCESS CONFIGURATION ===
+This mode allows you to configure which process to monitor based on an existing PID.
+The script will extract the CommandLine from the provided PID and use it as search pattern.
+=========================================
+
+Enter the PID of the process you want to monitor: 10756
+Searching for process with PID: 10756...
+
+=== FOUND PROCESS INFORMATION ===
+PID: 10756
+Name: powershell.exe
+Executable: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Command Line:
+  "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -WindowStyle Minimized -ExecutionPolicy Bypass -File "C:\inetpub\wwwroot\COPEC\copec_worker.ps1"
+=============================================
+```
+
+
 
 ## **Script Features:**
 
