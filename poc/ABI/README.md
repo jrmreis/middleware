@@ -76,7 +76,7 @@ Example: .\copec_hunter.ps1
 - Evidence saved in JSON files
 - Final operation summary
 
-## **How to Use:**
+## **Troubleshooting:**
 
 1. **Save the script** as `copec_hunter.ps1`
 2. **Run as administrator** in PowerShell:
