@@ -1,6 +1,6 @@
 # COPEC Hunter PowerShell Script
 
-PowerShell script for evidence collection and process termination. This script will search for processes with "COPEC" in the command line, collect information before and after termination.
+PowerShell script for evidence collection and process termination. This script will search for processes with determined command line, collect information before and after termination.
 
 ## Configuration
 
@@ -8,7 +8,7 @@ Run the script with `-config` parameter to configure the target process.
 
 **Example:** 
 ```powershell
-.\copec_hunter.ps1 -config
+.\cmd_line_hunter.ps1 -config
 ```
 ```shell-session
 CONFIGURATION MODE ACTIVATED
@@ -33,13 +33,13 @@ This pattern will be used to find the process during monitoring.
 Confirm this configuration? (Y/N): y
 
 === CONFIGURATION SAVED SUCCESSFULLY ===
-File: .\logs\process_config.json
+File: .\config\process_config.json
 Search pattern: "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -WindowStyle Minimized -ExecutionPolicy Bypass -File "C:\inetpub\wwwroot\COPEC\copec_worker.ps1"
 Method: CommandLine
 ====================================
 
 Now you can run the script normally to monitor this type of process.
-Example: .\copec_hunter.ps1
+Example: .\cmd_line_hunter.ps1
 
 ```
 
@@ -48,7 +48,7 @@ Example: .\copec_hunter.ps1
 ## **Script Features:**
 
 ### **1. Intelligent Search**
-- Searches for processes with "COPEC" in the command line
+- Searches for processes with determined command line
 - If not found, also searches in the process name
 - Provides detailed feedback about what was found
 
@@ -72,32 +72,42 @@ Example: .\copec_hunter.ps1
 - Alerts if the process is still running
 
 ### **5. Complete Documentation**
-- Detailed log with timestamps (`copec_investigation.log`)
+- Detailed log with timestamps (`process_monitor.log`)
 - Evidence saved in JSON files
 - Final operation summary
 
 ## **Troubleshooting:**
 
-1. **Save the script** as `copec_hunter.ps1`
+1. **Save the script** as `cmd_line_hunter.ps1`
 2. **Run as administrator** in PowerShell:
    ```powershell
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-   .\copec_hunter.ps1 -config
+   .\cmd_line_hunter.ps1 -config
    ```
    or
    ```powershell
    PowerShell -ExecutionPolicy Bypass -File ".\copec_hunter.ps1"
-   .\copec_hunter.ps1 -config
+   .\cmd_line_hunter.ps1 -config
    ```
    or
    ```powershell
    Unblock-File -Path ".\copec_hunter.ps1"
-   .\copec_hunter.ps1 -config
+   .\cmd_line_hunter.ps1 -config
    ```
-
+## **Directory Tree:**
+```powershell
+script/
+├── config/
+│   └── process_config.json
+├── logs/
+│   ├── process_monitor.log
+│   ├── process_pid_after_respawn_20250911_032549.json
+│   └── process_pid_before_taskkill_20250911_032528.json
+└── cmd_line_hunter.ps1
+```
 
 ## **Generated Files:**
-- `copec_investigation.log` - Complete operation log
+- `copec_monitor.log` - Complete operation log
 - `copec_evidence_PID_[number]_[timestamp].json` - Pre-termination evidence
 - `copec_termination_PID_[number]_[timestamp].json` - Post-termination evidence
 
