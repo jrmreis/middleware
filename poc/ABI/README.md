@@ -1,4 +1,4 @@
-# COPEC Hunter PowerShell Script
+# Command Line Hunter PowerShell Script
 
 PowerShell script for evidence collection and process termination. This script will search for processes with determined command line, collect information before and after termination.
 
