@@ -86,12 +86,12 @@ Example: .\cmd_line_hunter.ps1
    ```
    or
    ```powershell
-   PowerShell -ExecutionPolicy Bypass -File ".\copec_hunter.ps1"
+   PowerShell -ExecutionPolicy Bypass -File ".\cmd_line_hunter.ps1"
    .\cmd_line_hunter.ps1 -config
    ```
    or
    ```powershell
-   Unblock-File -Path ".\copec_hunter.ps1"
+   Unblock-File -Path ".\cmd_line_hunter.ps1"
    .\cmd_line_hunter.ps1 -config
    ```
 ## **Directory Tree:**
@@ -107,8 +107,8 @@ script/
 ```
 
 ## **Generated Files:**
-- `copec_monitor.log` - Complete operation log
-- `copec_evidence_PID_[number]_[timestamp].json` - Pre-termination evidence
-- `copec_termination_PID_[number]_[timestamp].json` - Post-termination evidence
+- `process_monitor.log` - Complete operation log
+- `process_evidence_PID_[number]_[timestamp].json` - Pre-termination evidence
+- `process_termination_PID_[number]_[timestamp].json` - Post-termination evidence
 
 The script is safe and provides complete documentation for auditing or subsequent forensic analysis.
