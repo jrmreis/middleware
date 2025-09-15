@@ -1,7 +1,7 @@
-# Script to locate, collect evidence and terminate COPEC process
+# Script to locate, collect evidence and terminate cmd_line process
 # Author: Joel R M Reis (ABI - Middleware Team)
-# Date: july-2025
-# Version: 2.0 - With dynamic configuration via PID
+# Date: sept-2025
+# Version: 2.1 - With dynamic configuration via PID
 
 # IMPORTANT: param block must be first executable statement
 param(
@@ -18,9 +18,20 @@ if (-not (Test-Path -Path $script:logDirectory)) {
 } else {
     Write-Host "Logs directory already exists: $script:logDirectory" -ForegroundColor Green
 }
+$script:confDirectory = ".\config"
+if (-not (Test-Path -Path $script:confDirectory)) {
+    Write-Host "Creating cofig directory: $script:confDirectory" -ForegroundColor Yellow
+    New-Item -ItemType Directory -Path $script:confDirectory -Force | Out-Null
+    Write-Host "Config directory created successfully." -ForegroundColor Green
+} else {
+    Write-Host "Config directory already exists: $script:confDirectory" -ForegroundColor Green
+}
 
 # Configuration file
-$configFile = "$script:logDirectory\process_config.json"
+$configFile = "$script:confDirectory\process_config.json"
+
+# Configuration Process Target
+$processTarget = "xfmdatasource.exe"
 
 # Function to log entries with timestamp
 function Write-Log {
@@ -68,6 +79,15 @@ function Set-ProcessConfiguration {
             $commandLine = $processInfo.CommandLine
             $processName = $processInfo.Name
             $executablePath = $processInfo.ExecutablePath
+
+            if (($processName -eq $processTarget)) {
+                Write-Host "Checking Process Name... ${processName}, allowed." -ForegroundColor Green
+            } else {
+                Write-Host "Look out! The Process Name ${processName} is not allowed to continue!" -ForegroundColor Red
+                exit 1
+            }
+
+            # Display process information
             
             Write-Host "`n=== FOUND PROCESS INFORMATION ===" -ForegroundColor Green
             Write-Host "PID: $targetPid" -ForegroundColor White
@@ -117,7 +137,7 @@ function Set-ProcessConfiguration {
                 Write-Host "====================================" -ForegroundColor Green
                 
                 Write-Host "`nNow you can run the script normally to monitor this type of process." -ForegroundColor Cyan
-                Write-Host "Example: .\copec_hunter.ps1" -ForegroundColor White
+                Write-Host "Example: .\cmd_line_hunter.ps1" -ForegroundColor White
                 
                 return $true
             } else {
@@ -141,7 +161,7 @@ function Get-ProcessConfiguration {
     if (-not (Test-Path $configFile)) {
         Write-Host "Configuration file not found: $configFile" -ForegroundColor Red
         Write-Host "Run the script with -config parameter to configure the target process." -ForegroundColor Yellow
-        Write-Host "Example: .\copec_hunter.ps1 -config" -ForegroundColor White
+        Write-Host "Example: .\cmd_line_hunter.ps1 -config" -ForegroundColor White
         return $null
     }
     
@@ -166,14 +186,11 @@ function Find-TargetProcess {
     }
     
     try {
-        if ($Config.SearchMethod -eq "ProcessName") {
-            # Search by process name
+        # Special handling for xfmdatasource.exe - search by command line pattern
+        if ($Config.ProcessName -eq $processTarget -or $Config.CommandLinePattern -like "*xfmdatasource.exe*") {
+            Write-Log "Searching for xfmdatasource.exe by command line pattern: $($Config.CommandLinePattern)" "INFO"
             $targetProcess = Get-CimInstance -ClassName Win32_Process | Where-Object {
-                $_.Name -eq $Config.CommandLinePattern
-            }
-        } else {
-            # Search by command line pattern
-            $targetProcess = Get-CimInstance -ClassName Win32_Process | Where-Object {
+                $_.Name -eq $processTarget -and 
                 $_.CommandLine -like "*$($Config.CommandLinePattern)*"
             }
         }
