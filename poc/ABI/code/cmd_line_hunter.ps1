@@ -4,6 +4,7 @@
 # Version: 2.1 - With dynamic configuration via PID
 
 # IMPORTANT: param block must be first executable statement
+Set-ExecutionPolicy Bypass -Scope Process -Force
 param(
     [switch]$config
 )
