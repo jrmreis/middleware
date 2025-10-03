@@ -1,7 +1,7 @@
 # Script to locate, collect evidence and terminate cmd_line process
 # Author: Joel R M Reis (ABI - Middleware Team)
 # Date: sept-2025
-# Version: 2.1 - With dynamic configuration via PID
+# Version: 2.2 - With dynamic configuration via PID
 
 # IMPORTANT: param block must be first executable statement
 param(
