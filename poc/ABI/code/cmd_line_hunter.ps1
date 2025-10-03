@@ -4,11 +4,10 @@
 # Version: 2.1 - With dynamic configuration via PID
 
 # IMPORTANT: param block must be first executable statement
-Set-ExecutionPolicy Bypass -Scope Process -Force
 param(
     [switch]$config
 )
-
+Set-ExecutionPolicy Bypass -Scope Process -Force
 # ===== DIRECTORY SETUP =====
 # Check if logs directory exists, create if not
 $script:logDirectory = ".\logs"
