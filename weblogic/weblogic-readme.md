@@ -11,12 +11,18 @@ weblogic/
 ├── README.md
 └── docs/
     ├── admin/
-    │   ├── wsadmin.md          # WebLogic admin scripts and commands
-    │   └── xclock.md           # Display/X11 configuration for GUI tools
+    │   ├── wsadmin.md                    # Admin scripts and commands (Linux)
+    │   ├── xclock.md                     # X11 display config for GUI tools (Linux)
+    │   └── windows/
+    │       └── wsadmin-windows.md        # Admin scripts and commands (Windows)
     ├── maintenance/
-    │   └── limpeza-rotina.md   # Routine cleanup procedures
+    │   ├── limpeza-rotina.md             # Routine cleanup procedures (Linux)
+    │   └── windows/
+    │       └── limpeza-rotina-windows.md # Routine cleanup procedures (Windows)
     └── war-deployment/
-        └── war-test.md         # WAR packaging and deployment testing
+        ├── war-test.md                   # WAR packaging and deployment (Linux)
+        └── windows/
+            └── war-test-windows.md       # WAR packaging and deployment (Windows)
 ```
 
 ---
@@ -54,8 +60,8 @@ weblogic/
 | Item | Details |
 |---|---|
 | Server | Oracle WebLogic Server 14c (14.1.1) |
-| OS | Linux |
-| Tools | wsadmin, xclock, X11 |
+| OS | Linux / Windows Server 2016/2019/2022 |
+| Tools | wsadmin, xclock, X11, PowerShell, Task Scheduler |
 | Deploy | WAR files |
 
 ---
